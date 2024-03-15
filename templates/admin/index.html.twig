@@ -1,0 +1,117 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello AdminController!{% endblock %}
+
+{% block body %}
+<style>
+    body { 
+        background-color: #f4f4f4;
+        font-family: Arial, sans-serif;
+    }
+    h1 {
+        text-align: center;
+    }
+    .main-container {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+    }
+    .center-card{
+        width: 300px;
+        padding: 20px;
+        border-radius: 25px;
+        box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        background-color: #fff;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+    .center-card div {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between; /* Change to space-between for better spacing */
+        width: 100%;
+        gap: 10px
+    }
+    .center-card table {
+        width: 100%;
+        border-collapse: collapse;
+        background-color: #f4f4f4;
+        border-radius: 10px;
+        box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+
+    .center-card thead {
+        background-color: #4cabaf;
+        color: white;
+        text-align: left;
+        border-radius: 10px 10px 0 0;
+    }
+
+    .center-card th {
+        padding: 12px;
+    }
+
+    .center-card td {
+        padding: 8px;
+        border-bottom: 1px solid #ddd;
+    }
+
+    .center-card tbody tr:last-child td {
+        border-bottom: none;
+    }
+
+    .center-card tbody tr:hover {
+        background-color: #f5f5f5;
+    }
+
+    .center-card a.button {
+        display: inline-block;
+        text-decoration: none;
+        background-color: #af504c;
+        color: white;
+        padding: 5px 10px;
+        border-radius: 4px;
+        cursor: pointer;
+    }
+
+    .center-card a.button:hover {
+        background-color: #c0716e;
+    }
+</style>
+<div class='main-container'>
+    <h2>Admin Dashboard</h2>
+    <div class='center-card'>
+        <table>
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Username</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% if users is empty %}
+                    <tr>
+                        <td colspan="3">No Users!</td>
+                    </tr>
+                {% else %}
+                    {% for user in users %}
+                        <tr>
+                            <td>{{ user.getId() }}</td>
+                            <td>{{ user.getUsername() }}</td>
+                            <td>
+                                <a class='button' href="{{ path('app_delete_user', {'id': user.getId()}) }}" onclick="return confirm('Are you sure you want to delete this user?')">Delete</a>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                {% endif %}
+            </tbody>
+        </table>
+    </div>
+</div>
+
+{% endblock %}

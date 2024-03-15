@@ -1,0 +1,69 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Home!{% endblock %}
+
+{% block body %}
+<style>
+    body { 
+        background-color: #f4f4f4;
+        font-family: Arial, sans-serif;
+    }
+    h1 {
+        text-align: center;
+    }
+    a.button {
+        display: inline-block;
+        text-decoration: none;
+        width: 50%;
+        background-color: #4CAF50;
+        color: white;
+        padding: 15px 15px;
+        margin: 8px auto;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        text-align: center;
+    }
+    a.button:hover {
+        background-color: #45a049;
+    }
+    .main-container {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+    }
+    .center-card{
+        width: 300px;
+        padding: 20px;
+        border-radius: 25px;
+        box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        background-color: #fff;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+    .center-card div {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between; /* Change to space-between for better spacing */
+        width: 100%;
+        gap: 10px
+    }
+</style>
+<div class='main-container'> 
+{% if app.user %}
+        <h1>Welcome, {{ app.user.username }}!</h1>
+{% else %}
+    <div class='center-card'>
+    <h1>You Are A...</h1>
+        <div>
+            <a class='button' href="{{ path('app_register') }}">New User?</a>
+            <a class='button' href="{{ path('app_login') }}">Existing User?</a>
+        </div>   
+    </div> 
+{% endif %}
+</div> 
+{% endblock %}

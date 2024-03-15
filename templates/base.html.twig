@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <style>
+            body { 
+                background-color: #f4f4f4;
+                font-family: Arial, sans-serif;
+            }
+            .navbar ul {
+                list-style-type: none;
+                margin: 0;
+                padding: 0;
+                overflow: hidden;
+                background-color: #333;
+                border-radius: 5px;
+            }
+            .navbar li {
+                float: right;
+            }
+            .navbar li.navbar-title {
+                float: left;
+                padding: 14px 16px;
+                color: white;
+                font-size: 14px;
+                font-weight: bold;
+            }
+            .navbar li a {
+                display: block;
+                color: white;
+                text-align: center;
+                padding: 14px 16px;
+                text-decoration: none;
+            }
+            .navbar li a:hover {
+                background-color: #111;
+            }
+        </style>
+    </head>
+    <body>
+        <nav class='navbar'>
+            <ul>
+                <li class="navbar-title">Assignment 3</li>
+                {% if app.user %}
+                    {% if is_granted('ROLE_ADMIN') %}
+                        <li><a href="{{ path('app_logout') }}">Logout</a></li>
+                        <li><a href="{{ path('app_admin') }}">Admin Dashboard</a></li>
+                    {% else %}
+                        <li><a href="{{ path('app_logout') }}">Logout</a></li>
+                        <li><a href="{{ path('app_profile') }}">Profile</a></li>
+                    {% endif %}
+                {% else %}
+                    <li><a href="{{ path('app_register') }}">Register</a></li>
+                    <li><a href="{{ path('app_login') }}">Login</a></li>
+                {% endif %}
+                <li><a href="{{ path('app_home') }}">Home</a></li>
+            </ul>
+        </nav>
+
+        {% block body %}{% endblock %}
+    </body>
+</html>
